@@ -1,59 +1,69 @@
-// Array of trivia question objects
-var trivia = [
-    { 
-        question: "What is the capital of France?", 
-        choices: ["London", "New York", "Paris", "Sydney"],
-        answer: 2  // Index of the correct answer in the choices array
-    },
-    { 
-        question: "Who wrote 'To Kill a Mockingbird'?", 
-        choices: ["Mark Twain", "Harper Lee", "Ernest Hemingway", "George Orwell"], 
-        answer: 1
-    },
-    { 
-        question: "What is the symbol for gold on the periodic table?", 
-        choices: ["Ag", "Au", "Fe", "O"],
-        answer: 1
+// Import the 'fs' (File System) module for reading and writing files
+const fs = require('fs');
+
+// Import the 'readline' module for reading from and writing to the command line
+const readline = require('readline');
+
+// Create a readline interface for getting input from the user
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Function to ask the user a question
+function askQuestion(question) {
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => {
+      resolve(answer);
+    });
+  });
+}
+
+// Load the trivia data from the file
+fs.readFile('./trivia_data.json', (err, data) => {
+  // Handle the error, if any
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  // Parse the data into a JavaScript object
+  const triviaData = JSON.parse(data);
+
+  // Keep track of the current question and score
+  let currentQuestion = 0;
+  let score = 0;
+
+  // Function to ask the next question
+  async function nextQuestion() {
+    // If there are no more questions, end the game
+    if (currentQuestion >= triviaData.length) {
+      console.log(`Game over! Your score was ${score} out of ${triviaData.length}.`);
+      rl.close();
+      return;
     }
-];
 
-// Function to run when the page has finished loading
-window.onload = function() {
-    // Add a click event listener to the "generate" button
-    document.getElementById("generate").addEventListener("click", function() {
-        // Generate a random index for selecting a trivia question
-        var randomIndex = Math.floor(Math.random() * trivia.length);
-        // Select a trivia question using the random index
-        var triviaItem = trivia[randomIndex];
+    // Get the current question
+    const question = triviaData[currentQuestion];
 
-        // Display the question
-        document.getElementById("question").innerText = triviaItem.question;
-        // Hide the result message
-        document.getElementById("result").classList.add("hidden");
-        
-        // Get the "choices" div
-        var choicesElement = document.getElementById("choices");
-        // Clear any existing choices
-        choicesElement.innerHTML = '';
-        // Loop through the choices for the trivia question
-        triviaItem.choices.forEach(function(choice, index) {
-            // Create a new button for each choice
-            var button = document.createElement("button");
-            // Set the text of the button to the choice
-            button.innerText = choice;
-            // Add a click event listener to the button
-            button.addEventListener("click", function() {
-                // Check whether the choice is correct
-                if (index === triviaItem.answer) {
-                    // If the choice is correct, display a success message
-                    document.getElementById("result").innerText = "Correct!";
-                } else {
-                    // If the choice is incorrect, display a failure message
-                    document.getElementById("result").innerText = "Sorry, that's incorrect.";
-                }
-                // Show the result message
-                document.getElementById("result").classList.remove("hidden");
-            });
-            // Add the button to the "choices" div
-            choicesElement.appendChild(button);
- 
+    // Ask the question
+    const answer = await askQuestion(`${question.question} `);
+
+    // Check the answer
+    if (answer.toLowerCase() === question.answer.toLowerCase()) {
+      // If the answer is correct, increase the score
+      console.log('Correct!');
+      score++;
+    } else {
+      // If the answer is incorrect, tell the user the correct answer
+      console.log(`Sorry, the correct answer was ${question.answer}.`);
+    }
+
+    // Go to the next question
+    currentQuestion++;
+    nextQuestion();
+  }
+
+  // Start the game
+  nextQuestion();
+});
