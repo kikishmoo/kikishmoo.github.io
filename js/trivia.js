@@ -1,5 +1,20 @@
 // Array of trivia question objects
 var trivia = [
+    {
+        question: "Which planet is known as the 'Red Planet'?",
+        choices: ["Venus", "Mars", "Jupiter", "Saturn"],
+        answer: 1
+    },
+    {
+        question: "Who painted the Mona Lisa?",
+        choices: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+        answer: 2
+    },
+    {
+        question: "What is the largest ocean in the world?",
+        choices: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        answer: 3
+    },
     { 
         question: "What is the capital of France?", 
         choices: ["London", "New York", "Paris", "Sydney"],
