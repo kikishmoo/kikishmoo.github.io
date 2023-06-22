@@ -2,12 +2,18 @@
 <html>
 <head>
     <title>Trivia Game</title>
-    <script src="js/trivia.js"></script>
+    <script src="trivia.js"></script>
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <h1>Trivia Game</h1>
     <button id="generate">Generate Trivia Question</button>
     <p id="question"></p>
-    <p id="answer"></p>
+    <ul id="choices">
+        <!-- Choices will be inserted here -->
+    </ul>
+    <p id="result" class="hidden"></p>
 </body>
 </html>
