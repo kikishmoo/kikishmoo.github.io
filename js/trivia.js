@@ -1,22 +1,3 @@
-// Array of trivia question objects
-var trivia = [
-    { 
-        question: "What is the capital of France?", 
-        choices: ["London", "New York", "Paris", "Sydney"],
-        answer: 2  // Index of the correct answer in the choices array
-    },
-    { 
-        question: "Who wrote 'To Kill a Mockingbird'?", 
-        choices: ["Mark Twain", "Harper Lee", "Ernest Hemingway", "George Orwell"], 
-        answer: 1
-    },
-    { 
-        question: "What is the symbol for gold on the periodic table?", 
-        choices: ["Ag", "Au", "Fe", "O"],
-        answer: 1
-    }
-];
-
 // Function to run when the page has finished loading
 window.onload = function() {
     // Add a click event listener to the "generate" button
