@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Trivia Game</title>
-    <script src="js/trivia.js"></script>
+<!DOCTYPE html> <!-- Defines the document type -->
+<html> <!-- The root element of an HTML page -->
+<head> <!-- Contains meta information about the HTML page -->
+    <title>Trivia Game</title> <!-- Specifies the title of the HTML page -->
+    <script src="trivia.js"></script> <!-- Links the JavaScript file -->
     <style>
-        .hidden { display: none; }
+        .hidden { display: none; } /* CSS class for hiding elements */
     </style>
 </head>
-<body>
-    <h1>Trivia Game</h1>
-    <button id="generate">Generate Trivia Question</button>
-    <p id="question"></p>
-    <button>
-        <ul id="choices">
-        <!-- Choices will be inserted here -->
-    </ul></button>
-    <p id="result" class="hidden"></p>
+<body> <!-- Contains the content that is displayed on the page -->
+    <h1>Trivia Game</h1> <!-- A heading -->
+    <button id="generate">Generate Trivia Question</button> <!-- Button for generating a new question -->
+    <p id="question"></p> <!-- Paragraph where the question will be displayed -->
+    <div id="choices">
+        <!-- Buttons for choices will be inserted here by the JavaScript -->
+    </div>
+    <p id="result" class="hidden"></p> <!-- Paragraph where the result message will be displayed, initially hidden -->
 </body>
 </html>
