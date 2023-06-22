@@ -41,6 +41,8 @@ window.onload = function() {
             var button = document.createElement("button");
             // Set the text of the button to the choice
             button.innerText = choice;
+            // Set the margin of the button
+            button.style.margin = "0 10px";
             // Add a click event listener to the button
             button.addEventListener("click", function() {
                 // Check whether the choice is correct
